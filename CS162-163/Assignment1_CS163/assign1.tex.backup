@@ -1,0 +1,170 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\documentclass{article}
+\usepackage{enumitem}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+\linespread{1.0}
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\today} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\hmwkAuthorName} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\newcommand{\hmwkTitle}{Homework 1}
+\newcommand{\hmwkDueDate}{\todaysdate}
+\newcommand{\hmwkClass}{CS 162}
+\newcommand{\hmwkClassInstructor}{Karla Fant}
+\newcommand{\hmwkAuthorName}{Harsukh Singh}
+
+\lstset { %
+    language=C,
+    backgroundcolor=\color{white}, % set backgroundcolor
+    basicstyle=\footnotesize,% basic font setting
+}
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+%\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][\arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemNameoutline form} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\begin{document}
+
+\begin{homeworkProblem}
+Outline for my algorithm of success is as follows,
+
+\begin{enumerate}
+ \item Read and understand required materials for the class, including,
+    \begin{enumerate}
+    \item Syllabus
+    \item Pre-requisite reading and knowledge
+    \item Outline and due dates for the course. 
+    \end{enumerate}
+ \item Practice \verb!C++! programming using practice problems relating to data structures and abstraction.
+ \item Do required course reading before lecture.
+ \item Do required Assignments in a timely manner and follow the assignment grading rubric.
+ \item Attend class and lab and finish pre-labs in a timely manner.
+ 
+\end{enumerate}
+
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\begin {enumerate}[label=(\alph*)]
+\item Computer Ethics involves using a computer in an ethical manner in which one respects the privacy of others (including intellectual property) and integrity of the computing environment. Three examples or rules that might be important to follow are, 
+\begin{enumerate}[label=(\roman*)]
+ \item Do not use others intellectual property, including algorithm or code.
+ \item Design programs with regards to the system or objective of the assignment.
+ \item Do not use computers to harm others, which may include but not limited to cyber bullying.
+\end{enumerate}
+\item Plagiarism defined in the context of computer ethics is the act of using another persons intellectual property and passing it off as your own. 
+\item Cyberbullying is defined as the use electronic communication to bully others.
+\item Intellectual Property is defined as a design or methods (algorithm) for a system that is the result of a creative process and to which one has rights that are protected by the judicial system. 
+\end{enumerate}
+\end{homeworkProblem}
+\begin{homeworkProblem}
+\begin {enumerate}[label=(\alph*)]
+\item Tail recursion is defined as performing the set of calculations that are to be done before making your recursive call, which is the last operation. A function that is tail recursive makes a function call at the very end, thus not it does not require the entire stack. 
+\item A divide and conquer algorithm is defined as an algorithm that breaks a problem into two sub-problems that are simple enough to solve. 
+\end{enumerate}
+\centering{
+
+\begin{lstlisting}
+#include <stdio.h>
+#include <math.h>
+
+#define h 1e-5
+#define xmax 7
+#define xmin 0
+#define xstep 0.01
+
+int main()
+{
+  double dc, result, x;
+  double f(double);
+  FILE *output;
+  output = fopen("diffFile.dat","w");
+  for(x = xmin; x <=xmax; x =xstep){  
+    fprintf(output, "%f\t", x);
+    result = (f(x+h)-f(x))/h; //forward differentiation
+    fprintf(output,"%.10f\t", result);
+    result = (f(x+h/2)-f(x-h/2))/h; //central differentiation
+    fprintf(output,"%.10f\t", result);
+  }  
+return 0;  
+}
+
+double f(double x){
+  return (cos(x)*sin(x)); 
+}
+\end{lstlisting}
+}
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+ Three keywords that come up in the readings are the for keyword, the return keyword and the double keyword. Each of these keywords are used in the program in problem 3. Each of these keywords are standardized in every language with the exception being the double keyword which may not be included in a language that has a defined type (like Python), however most languages include all these keywords.  
+
+\end{homeworkProblem}
+
+
+\end{document}

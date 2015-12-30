@@ -1,0 +1,3 @@
+lightspeed systems:portland,or:c++ developer:develops c++ programs:computer science degree:37,000 dollars:
+intel:hillsboro,or:software engineer:develops c++ software:computer science:140,000 dollars:
+compound photonics:vancouver,wa:embedded engineer:develops software for embedded systems:engineering:190,000 dollars:

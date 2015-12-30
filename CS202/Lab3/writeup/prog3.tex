@@ -1,0 +1,122 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{mathtools}
+\usepackage{tikz-uml}
+\usepackage{tikz}
+\usepackage{fullpage}
+\sloppy
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+\linespread{1.0}
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\today} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\hmwkAuthorName} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\newcommand{\hmwkTitle}{Discussion And Design For Program 3}
+\newcommand{\hmwkDueDate}{\todaysdate}
+\newcommand{\hmwkClass}{CS 202}
+\newcommand{\hmwkClassInstructor}{Karla Fant}
+\newcommand{\hmwkAuthorName}{Harsukh Singh}
+
+\lstset { %
+    language=C,
+    backgroundcolor=\color{white}, % set backgroundcolor
+    basicstyle=\footnotesize,% basic font setting
+}
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+%\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][\arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemNameoutline form} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{showstringspaces=false
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+%%%
+\begin{document}
+\homeworkProblemName{\large \bfseries Debugging and Design} \\
+gdb and continuous design modification was required when working through this assignment. gdb helped in debugging memory leaks and semantically checking the program for behavioral correctness. Running the program and running the stack backtrace helped in finding the memory leaks and segmentation faults. Further stepping through main to find the semantic errors in the program was considerably more difficult in order to find the break points to set. A particular area where gdb was used was when the insertion was being done in the hash table and graph to that each nodes pointer either pointed to another vertex in the case of a graph or in the case of the hash table that each node pointed to a different song. This process was used to modify how the data was sent into the data structures so that it reduced the number of memory leaks and efficiency. gdb was used to step into some of the insert and remove functions of the data structures to find whether a memory leak had occured during the operation. In particular the commands used were the step and next functions. The code breaking was found with using the debugger in the graphical code interface using the tui command. The memory leaks in the program were checked using valgrind, since gdb has no functionality to do so. \\
+
+The program is composed of several classes from a bottom up design there classes are composed of a song class which holds the data for a song such as the artist name, the song name and the type of genres contained in the song, further the node encapsulates the song, which may for a linear linked list, the song may also form a linear linked list itself as well since it does contain a next pointer thus involving self similarity.  This class and its associated members forms the basis which other classes use to add to their own data, operator overloading is used to add, remove or copy song objects throughout the data structures. Operator overloading is used throughout the program either as a display, assignment and/or removal and insertion. Some operators are not overloaded because the complexity of the overloading breaks some of the code for example the insertions in the graph is not overloaded due to the synchronous use of the edge to point to other graph nodes. However both the playlist, song, hash table, node all use the operator overloading in their basic use. The display function in the hash table is another place where operator overloading is not done and also removing a particular artist from a hash table. In hindsight the hash table doesn't require a remove function but has one due to requirements. Each data structure has the full implementations of insert, retrieve, delete, display and etc. This was done as program requirements most program requirements are satisfied, some of these implementations take place as operator overloading, however the graph class does not do operator overloading. In conclusion operator overloading is used in the program however the trade-off between complexity and code functionality is used to decide where it was and was not implemented.  
+
+\begin{homeworkProblem}
+How well did the data structures perform for the assigned application? \\
+The data strucutres performed the operations of the assigned application mostly well with regards to efficieny and object oriented design. The design of the classes were by the objects that are instrinsic to the assignment for example, storing the song objects in their respective data structures based on artist or genre each differed in responsibility and searching despite having the song object stored in each node of the structure as encapsulated design. In this design most of the classes had very similar linked structures but each differed in some form of design fundamentally. Although the complexity is reduced somewhat using OOP the modularity of the program is decreased.   
+\end{homeworkProblem}
+
+
+
+\begin{homeworkProblem}
+Would a different data structure work better? If so, which one and why.\\
+In the case of the program problem the data structures chosen fit the task well. A alternative data structure that can be used in place of a graph would either be a tree or another hash table. Each of these has its own advantages with their respective running times. However the interconnectedness of the graph is not something that is found in many other data structures. For example doing a depth first search based on a name of a song and the genre may not be available in the tree data structures or hash table. Since the graph does implement a linear linked list with the increasing number of songs and number of vertices with more similar genres the insertion or retrieval would run slower as more songs are added to the database. The memory usage on the stack would increase quadratically as more songs are added. In the case of adding more data to the hash table or the trees copies of the data are added as more nodes are made, the copies are added to the genre nodes. In conclusion the data structure that fits the program design well is the graph.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+What was efficient about this program design?\\
+The efficiency of the design lies in the object oriented design of the program. The responsibilities are characterized as encapsulation or responsibility of each object. Each class working with data structures do implement the remove, insert and other data structures related functions. Although the code reusage is extensive throughout the program the data structures may not have much in common to form a heirarchy.   The relationships as encapsulation  served to simplify the code and reduce the complexity in design which contributed towards the efficiency of the design. Further using the tables both reduced the linear searching and increased run time efficiency.
+\end{homeworkProblem}
+
+
+\begin{homeworkProblem}
+What was not efficient about this program design?\\ 
+The inefficiency of the program lies in the code reusage. For example both the node and song pointers have a self similar strucutre(the next pointer). In this case bother can be treated as  a linear linked list. However the only data structure that should use this structure is the node and playlist shoudl be the nodes in the hash table. Further the hard coded constants for the data structures also add to the inefficiency. Some of the constants may not relect the optimized data structure and add to the operations like traversing, assignment, etc. Another glaring inefficiency of the program is how the graph operates for example if a song is added to the graph the number of genres is the number of copies that are added to the graph, a song with three genres allocated three times to each vertex of the genre. With the a large database this may cause stack-overflow.   
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+What would you do differently?\\ 
+Given more time, I would modify the hash table to be a linear linked lists of playlist instead of doing nodes with another linked list class. This would be a better design given the problem.  I would also chang the hard coded constants for some of the data strcutures to better represent the size of the problem using the file structure.   
+\end{homeworkProblem}
+\end{document}

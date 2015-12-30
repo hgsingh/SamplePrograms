@@ -1,0 +1,121 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{mathtools}
+\usepackage{tikz-uml}
+\usepackage{tikz}
+\usepackage{fullpage}
+\sloppy
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+\linespread{1.0}
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\today} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\hmwkAuthorName} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\newcommand{\hmwkTitle}{Discussion And Design For Program 4}
+\newcommand{\hmwkDueDate}{\todaysdate}
+\newcommand{\hmwkClass}{CS 202}
+\newcommand{\hmwkClassInstructor}{Karla Fant}
+\newcommand{\hmwkAuthorName}{Harsukh Singh}
+
+\lstset { %
+    language=C,
+    backgroundcolor=\color{white}, % set backgroundcolor
+    basicstyle=\footnotesize,% basic font setting
+}
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+%\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][\arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemNameoutline form} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{showstringspaces=false
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+%%%
+\begin{document}
+\homeworkProblemName{\large \bfseries Design} \\
+
+The program is composed of several classes from a bottom up design the classes are composed of a basic application class which holds generic data items of an application such as name, address and etc. further the application contains a next pointer to work as a list to add to the job class. The job class encapsulates an application such that a job can be composed of a list of applicants that have submitted an application to the job. Dynamic binding is used by making the application class an abstract class with a virtual display function. Further the derived classes contain data members of jobs and questions to make a linear linked list in those classes. Basic memeber functions for the data structures (particularly related to a linked list) were made, such as insert, remove, retrieve, addition and etc. Dynamic binding is used when adding data to the particular application. The manager class particularly uses the dynamic binding and run time type identification when instantiating the classes. Both technical and work application clases have many of the same functions and although they should have been pushed up the heirarchy this was not done (although  it should have been) due to implementing the operation in a different manner. The technical application class copies a linear linked list using the copy function provided in the questions class. A full copy is made for exploring the differences between Java and C. Functions like copy and remove and others are implemented recursively while others such as insert and display are implemented iteratively due to finding a middle ground between efficiency and programming tasks. 
+
+\begin{homeworkProblem}
+How well did the data structures perform for the assigned application? \\
+The data strucutres performed the operations of the assigned application mostly well with regards to efficieny and object oriented design. The design of the classes were by the objects that are instrinsic to the assignment for example, storing the applicants data in two different classes as a heirarchy design was essential to the program. Further dynamic binding was used to downcast to the derived classes to display functions that were not in the base class through casting. In this design most of the classes had very similar linked structures but each differed in some form of design fundamentally. Although the complexity is reduced somewhat using OOP the modularity of the program is decreased.   
+\end{homeworkProblem}
+
+
+
+\begin{homeworkProblem}
+Would a different data structure work better? If so, which one and why.\\
+In the case of the program problem the data structures chosen fit the task well. A alternative data structure that can be used in place of a linear linked list is a  hash table since the amount of jobs are known but the number of applicants can be hashed with a key. Each of these has its own advantages with their respective running times. However the linearity of the linear linked list is very inefficient. For example the length of the linked list requires a polynomial time display due to the interconnected linkedlist, this might be reduced due to chaining of the hash table. Since the program does implement a linear linked list with the increasing number of applicants, the program may run slower.  In conclusion the data structure that fits the program design well is either a linear list or a hash table.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+What was efficient about this program design?\\
+The efficiency of the design lies in the object oriented design of the program. The responsibilities are characterized as encapsulation or responsibility of each object. Each class working with data structures do implement the remove, insert and other data structures related functions. Although the code reusage is extensive throughout the program the data structures may not have much in common to form a heirarchy.   The relationships as encapsulation  served to simplify the code and reduce the complexity in design which contributed towards the efficiency of the design. Further using the tables both reduced the linear searching and increased run time efficiency.
+\end{homeworkProblem}
+
+
+\begin{homeworkProblem}
+What was not efficient about this program design?\\ 
+The inefficiency of the program lies in the code repeating. For example both the application, job and questions have a next pointer. Further the application heirarchy repeats a lot of code that may be condensed into the base class. In this case all three can be treated as  a linear linked list node.  Even further a generic linked list can be derived into all three structures so that the heirarchy is reduced even further.   
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+What would you do differently?\\ 
+Given more time, I would modify the heirarchy and push more functionality into the base of the heirarchy (application class) which would reduce the code and help make the design leaner. Further I would also change the hard coded constants for some of the data strcutures to better represent the user input into the design.   
+\end{homeworkProblem}
+\end{document}

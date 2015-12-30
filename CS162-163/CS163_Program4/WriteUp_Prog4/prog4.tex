@@ -1,0 +1,118 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{mathtools}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+\linespread{1.0}
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\today} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\hmwkAuthorName} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\newcommand{\hmwkTitle}{Discussion For Program 4}
+\newcommand{\hmwkDueDate}{\todaysdate}
+\newcommand{\hmwkClass}{CS 163}
+\newcommand{\hmwkClassInstructor}{Karla Fant}
+\newcommand{\hmwkAuthorName}{Harsukh Singh}
+
+\lstset { %
+    language=C,
+    backgroundcolor=\color{white}, % set backgroundcolor
+    basicstyle=\footnotesize,% basic font setting
+}
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+%\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][\arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemNameoutline form} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{showstringspaces=false
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\begin{document}
+
+\begin{homeworkProblem}
+How well did the data structures perform for the assigned application? \\
+The ADT implented in this assignment was the Binary Search Tree. The assigned application was inserting, removing and retrieving data of an oscar nominee type. The oscar nominee data  is a struct consisting of a character array and number of votes of the character array, i.e. nominee votes. The data structure performed these assigned tasks with better efficiency compared to some other data structures used in this class. Compared to a linear linked list the sequential search with tail optimization still performs in linear time, however the binary search tree performs in a logarithmic time efficiency when doingthe remove and retrieve operation. In fact other than the in-order traversal the binary tree performs much better than a linear structure, given enough data items.  
+
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Would a different data structure work better? If so, which one and why.\\
+Given the problem type to create a data set of oscar nominees, the better data structure might be to use a hash table where the category can be the basis of the hash function. Since the categories are a finite set, the hash table would be fully used  in memory. Each category can correspond to a different index in a hash table. Since the hash table performs the adding a new nominee in $O(1)$ given that all nominees are known and that the collision resolution technique used is quadratic probing. 
+\end{homeworkProblem}
+\begin{homeworkProblem}
+What was efficient about this program design?\\
+Using a binary tree the efficiency relied on the fact that the use of memory in the heap was efficient. In that they do not reserve more memory than needed. Compared to a linked list with a one pointer, the binary tree may use an extra child pointer but the data type has better algorithms for performing tasks of retrieving, inserting and removal. This efficiency only works in the best case scenario, which in this case is given that the data inserted creates a full binary tree that is height balanced. Given that the height of a binary tree is, on average $\lceil\log_2(n+1)\rceil $ the average number of comparisons for removing, inserting and retrieving also are $O(\log(n))$ since it is binary data structure using a binary search. Since the data provided is searched based on alphabetical order, the data when inserting or searching has to be different enough (alphabetically compared) that the tree is balanced for example, if the nominees for the best movie were, Matrix, Matrices, Matlock, this would be a linked list. 
+\end{homeworkProblem}
+
+
+\begin{homeworkProblem}
+What was not efficient about this program design?\\
+Continuing from the previous question given that the data is sorted alphabetically, the operations of retrieving, inserting, removing and traversing are all performed in the worst case function, which is a linear time. This then becomes a linked list with an extra pointer over head per node. Thus the data has to be sufficiently randomized. Further the implentation of each function is recursive, so to make sure that stack over flow does not occur tail call optimizations have to made so to that it will retain the same efficiency as iteration. 
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+What would you do differently?\\
+In this assignment some recursive functions do not have tail call optimization so adding tail-optimization would be implemented. A get height function would also be useful to check if a tree is balanced, so checking if the left height of a subtree matches the right subtree height.  Further adding functions like getting a user to write to a file first might be a better way to read in data to binary tree. For example once a user writes to a file adding the nominee and number of votes, the file can then be read randomly so for large trees, this might be a better way to maintain the data. In applications like storing movies in a database with a binary tree structure, reading a file with a sorting algorithm to minimize the height of the tree would ensure the logarithmic time performance. 
+
+\end{homeworkProblem}
+
+\end{document}

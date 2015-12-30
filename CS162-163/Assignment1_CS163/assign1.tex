@@ -1,0 +1,181 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\documentclass{article}
+\usepackage{enumitem}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+\linespread{1.0}
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\today} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\hmwkAuthorName} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\newcommand{\hmwkTitle}{Homework 1}
+\newcommand{\hmwkDueDate}{\todaysdate}
+\newcommand{\hmwkClass}{CS 163}
+\newcommand{\hmwkClassInstructor}{Karla Fant}
+\newcommand{\hmwkAuthorName}{Harsukh Singh}
+
+\lstset { %
+    language=C,
+    backgroundcolor=\color{white}, % set backgroundcolor
+    basicstyle=\footnotesize,% basic font setting
+}
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+%\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][\arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemNameoutline form} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{showstringspaces=false
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\begin{document}
+
+\begin{homeworkProblem}
+Outline for my algorithm of success is as follows,
+
+\begin{enumerate}
+ \item Read and understand required materials for the class, including,
+    \begin{enumerate}
+    \item Syllabus
+    \item Pre-requisite reading and knowledge
+    \item Outline and due dates for the course. 
+    \end{enumerate}
+ \item Practice \verb!C++! programming using practice problems relating to data structures and abstraction.
+ \item Do required course reading before lecture.
+ \item Do required Assignments in a timely manner and follow the assignment grading rubric.
+ \item Attend class and lab and finish pre-labs in a timely manner.
+ 
+\end{enumerate}
+
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\begin {enumerate}[label=(\ashowstringspaces=falselph*)]
+\item Computer Ethics involves using a computer in an ethical manner in which one respects the privacy of others (including intellectual property) and integrity of the computing environment. Three examples or rules that might be important to follow are, 
+\begin{enumerate}[label=(\roman*)]
+ \item Do not use others intellectual property, including algorithm or code.
+ \item Design programs with regards to the system or objective of the assignment.
+ \item Do not use computers to harm others, which may include but not limited to cyber bullying.
+\end{enumerate}
+\item Plagiarism defined in showstringspaces=falsethe context of computer ethics is the act of using another persons intellectual property and passing it off as your own. 
+\item Cyberbullying is defined as the use electronic communication to bully others.
+\item Intellectual Property is defined as a design or methods (algorithm) for a system that is the result of a creative process and to which one has rights that are protected by the judicial system. 
+\end{enumerate}
+\end{homeworkProblem}
+\begin{homeworkProblem}
+\begin {enumerate}[label=(\alph*)]
+\item Tail recursion is defined as performing the set of calculations that are to be done before making your recursive call, which is the last operation. A function that is tail recursive makes a function call at the very end, thus not it does not require the entire stack. 
+\item A divide and conquer algorithm is defined as an algorithm that breaks a problem into two sub-problems that are simple enough to solve. For example a merge sort will sort an array by \textbf{dividing} the array into chars and \textbf{conquering} by comparing each char.
+\item The base case of a recursive function is a case for the solution can be stated without recursion. 
+\itemIn this algorithm the the base case returns the trivial case of array size 1 and the rest of the function breaks the array into smaller pieces by comparing each index with current one and after max is determined the recursive call is made thus being an example of tail recursion.
+\begin{lstlisting}[showstringspaces=false]
+int array_max(int a[], int n)
+{
+  int tail_max, max;
+  printf("val = %2i , head = %2i", a[0], n); 
+  //base case
+  if(n==1)
+  {
+    max = a[0];
+  }
+  else 
+  {
+    tail_max = array_max(&a[1], n-1);
+    if(a[0]> tail_max)
+    {
+      max = a[0];
+    }
+    else{
+      max = tail_max;
+     }
+  }
+  printf("n =%2i val=%2i returning = %2i",n,a[0],max);
+  return max; 
+}
+\end{lstlisting}
+
+\end{enumerate}
+\end{homeworkProblem}
+
+
+\begin{homeworkProblem}
+Three features of VIM
+\begin{enumerate}
+\item To start VIM just type VIM followed by [filename].
+
+\item vimtutor is available on most linux package systems to learn vim. 
+
+\item There are options available on the `NIX man pages to operate vim, vim [options] [filename]
+\end{enumerate}
+Three features of gdb
+
+\begin{enumerate}
+\item To start gdb an object file is needed, so in \verb!C++!  to compile ``g++ *.cpp -o new'' , then the debugger is started using ``gdb new'' command on the terminal.
+
+\item Running the program in the debugger involves using ``(gbd) run''.
+
+\item Stepping into a function call involves using the ``(gdb) step''.
+\end{enumerate}
+\end{homeworkProblem}
+
+
+\end{document}

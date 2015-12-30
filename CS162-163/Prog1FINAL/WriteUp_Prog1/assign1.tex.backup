@@ -1,0 +1,135 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+\linespread{1.0}
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\today} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\hmwkAuthorName} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\newcommand{\hmwkTitle}{Discussion For Program 1}
+\newcommand{\hmwkDueDate}{\todaysdate}
+\newcommand{\hmwkClass}{CS 163}
+\newcommand{\hmwkClassInstructor}{Karla Fant}
+\newcommand{\hmwkAuthorName}{Harsukh Singh}
+
+\lstset { %
+    language=C,
+    backgroundcolor=\color{white}, % set backgroundcolor
+    basicstyle=\footnotesize,% basic font setting
+}
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+%\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][\arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemNameoutline form} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{showstringspaces=false
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\begin{document}
+
+\begin{homeworkProblem}
+How well did the data structure perform for the assigned application? \\
+
+The data strucutre comprises of a linear linked list, with a power object of struct type and a dynamically allocated array of hero object which are also struct type. The data strucutre consists of a constructor to initialize the head, temp and current pointers. Further the data structure consists of a load function that will read the data files and create a linear linked list for the power and hero objects. For the user interface a add hero, remove power and display functions are implented. The assigned application was to read a power and hero file and create the assigned data structure for the user to interact with, this function has an efficiency of $ O(n^3)$. The user can select the display all of the powers and heros associated with the particular power or an alternative display function which will take an argument of a string of characters representing the power and match it to the characters. Both of these functions had a run time efficiency of $ O(n^2)$. Both involved a sequential search and iteration through the hero objects array. Both of these objects perform the display task without any run time errors, however better data structures can be designed for efficiency purposes (see 2). For further usability the program also contains a add hero and remove power function, however these functions do not write back to file. The add hero function will add a hero object by asking the user for name which is limited to 33 characters and any alpha-numerical or symbol otherwise for example 7-up Man or $\lambda$ Woman. Then an iterator will search the linked list to find the particular powers for the hero and add it to the array structure. Which involves a copy and delete (see program for more details). The remove power function involves a sequential search and going through the motion of dragging a temporary pointer to do the normal delete operations for a linear linked list. 
+% \begin{enumerate}
+%  \item Read and understand required materials for the class, including,
+%     \begin{enumerate}
+%     \item Syllabus
+%     \item Pre-requisite reading and knowledge
+%     \item Outline and due dates for the course. 
+%     \end{enumerate}
+%  \item Practice \verb!C++! programming using practice problems relating to data structures and abstraction.
+%  \item Do required course reading before lecture.
+%  \item Do required Assignments in a timely manner and follow the assignment grading rubric.
+%  \item Attend class and lab and finish pre-labs in a timely manner.
+\end{enumerate}
+
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Would a different data structure work better? If so, which one and why.\\
+
+A tree with head pointer to power nodes might be an easier data structure to use for a database and problem like this. There is less memory overhaul and a depth first search might be an easier function to implement for a particular node. However for large tree structures this might be worse, an implementation would probably resolve this question. The children of the parent power objects can be the hero objects and the powers can be linked lists. However this still ends up as memory intensive linked list and requires heavy duty search algorithms. 
+\end{homeworkProblem}
+\begin{homeworkProblem}
+What was efficient about this program design?\\
+
+The efficiency in this design relies on the memory aspects of the data structure. Each power was a separate entity in the run time memory and not contiguous. However the downside of this can be the number of super heroes allocated to memory is contiguous and for a larger database this can be a problem. 
+\end{homeworkProblem}
+
+
+\begin{homeworkProblem}
+What was not efficient about this program design?\\
+
+The amout of memory for copying, assiging and interacting with the data structure was an issue. Sequential searches and loading for larger databases will eventually become an issue if these algorithms are used. 
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+What would you do differently?\\
+
+In hindsight it would be better to write to files to add heros and their descriptions so that they can be used when the program is called again. 
+ 
+\end{homeworkProblem}
+
+\end{document}

@@ -1,0 +1,118 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{mathtools}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+\linespread{1.0}
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\today} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\hmwkAuthorName} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\newcommand{\hmwkTitle}{Discussion For Program 5}
+\newcommand{\hmwkDueDate}{\todaysdate}
+\newcommand{\hmwkClass}{CS 163}
+\newcommand{\hmwkClassInstructor}{Karla Fant}
+\newcommand{\hmwkAuthorName}{Harsukh Singh}
+
+\lstset { %
+    language=C,
+    backgroundcolor=\color{white}, % set backgroundcolor
+    basicstyle=\footnotesize,% basic font setting
+}
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+%\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][\arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemNameoutline form} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{showstringspaces=false
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\begin{document}
+
+\begin{homeworkProblem}
+How well did the data structures perform for the assigned application? \\
+The ADT implemented in this assignment was a directed graph (a digraph). The assigned functions or tasks for this ADT to perform are building the graph or inserting vertices in non-null positions, displaying all next vertices (this is a recursive depth first search given a vertex v). Further a display all and remove all functions are also implemented. The structure performed these assigned tasks well, compared to most other data structures. The reason why this data structure performed the task well was because that there are relations between the given vertices. These relationships are the unweighted paths between the given vertices that allow the implentation of the graph algorithms like topologically sorting (not implemented) and if weighted then kruskal can be implemented. 
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Would a different data structure work better? If so, which one and why.\\
+The assigned task would be difficult to manage with a tree which would be the only data structure capable of handling this assigned task. If the graph were weighted the tree would work with a huge memory over head (extra pointers, weights between each relationship of parent and children). This data structure still would be a pointless implentation since the graph can be decomposed into a tree using kruskal, prim or even using a topological sorting to make a linear list. Another close data structure that might be implented is a hash table which doesn't solve the connections between each of the nodes. The hash table has a similar structure being an array of linear linked lists but cannot solve the problem using the functions implented in a hash table. So for the assigned application a graph is the best structure to use. 
+\end{homeworkProblem}
+\begin{homeworkProblem}
+What was efficient about this program design?\\
+
+The efficiency in this design relied on the implmentation of the adjacency table which allows the relationship between each vertex node and the linked chains (edges). This allows for concepts like cycles between the vertices. This cannot be done with a tree structure, otherwise it wouldn't be a tree. The efficiency of the design of the graph structure is really about the problems that is being solved with the graph. For example trying to solve a sort for a given dataset would be inefficient to try to solve with a graph. The efficiency of the aglorithms implented mostly consist of simple loops and have $O(n)$ efficieny. The most interesting algorithm is the depth-first search which does not have a linear time efficiency. For the worst case the time is $O(\abs{V})$ where V is the vertex that the depth first search is being started from. Then the depth first finds all the vertices adjacent to the vertex and visit the adjacent vertices.
+\end{homeworkProblem}
+
+
+\begin{homeworkProblem}
+What was not efficient about this program design?\\
+The inefficiency in the program design is that the program limits the amount of vertices that can be added to the table. Since the adjacency list is an array of linked lists the array can't be stretched beyond the parameter set at compile time or run time. This leads to issues, for example in the assigned application, if the user finds another ride, the ride vertex cannot be added to the graph without deleting and reimplenting the table. So the table size of the adjacency list plays a big part in the run time memory and implementation of the program. 
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+What would you do differently?\\
+Adding weights to the graph allows for an array of more intereting algorithms that can be implented Floyd's algorithm given that the graph is both weighted and directed or Dijkstra's algorithm if it is not directed. Finding the minimum spanning tree can also be done using Prim's algorithm if undirected and Kruskal's algorithm if directed. Each of these algorithms have their own advantages, using the Floyd's algorithm, the user can find the shortest but compete path in the graph. Using Kruskal's algorithm the user can find which rides to finish first based on the edges. Since these algorithms were not required in the assigned application, they were not implemented but can be.   
+
+\end{homeworkProblem}
+
+\end{document}

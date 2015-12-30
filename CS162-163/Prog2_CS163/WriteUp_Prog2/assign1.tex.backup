@@ -1,0 +1,124 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+\linespread{1.0}
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\today} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\hmwkAuthorName} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\newcommand{\hmwkTitle}{Discussion For Program 2}
+\newcommand{\hmwkDueDate}{\todaysdate}
+\newcommand{\hmwkClass}{CS 163}
+\newcommand{\hmwkClassInstructor}{Karla Fant}
+\newcommand{\hmwkAuthorName}{Harsukh Singh}
+
+\lstset { %
+    language=C,
+    backgroundcolor=\color{white}, % set backgroundcolor
+    basicstyle=\footnotesize,% basic font setting
+}
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+%\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][\arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemNameoutline form} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{showstringspaces=false
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\begin{document}
+
+\begin{homeworkProblem}
+How well did the data structures perform for the assigned application? \\
+
+The data structures used in this program comprise of a linked list of arrays and circular linked list. The circular linked list is used to keep a track of the history used and the stack keeps a list of operations. In hindsight the circular linked list may have been computationally expensive when considered that it requires both traversal for displaying and minor operations for dequeue and enqueue. Further memory use would have better if it was a circular linked list of arrays. This is because the memory allocated for each node on the heap is littered through out the run time stack frames for when they're called. The data structure used for each ADT is mostly seperated by walls, however there is cases where one variable is altered by two different classes, this may cause some side effects during run time. A few functions like dequeue and display for the stack ADT may not have been required, so not quite sure what the reason for the implementation. The problem with the implementation, is in the undo functions where if the match is not found the entire stack is popped and nothing is left. 
+
+
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Would a different data structure work better? If so, which one and why.\\
+
+A better data structure for this programming assignment would have to be a binary parse tree from converting from infix to prefix notation for determining precidence and keeping a history of the calculations. The display function would still be iterative and on the order of $O(n \times log(n))$. Then converting each of the operations and numbers from characters to actual computation would be done in the same class. Thus, only one ADT would be required. The recovery of the mathematical expression can be done using the binary search since it is a binary parse tree. This implementation would not be more than a few functions and one ADT with a client interface. 
+\end{homeworkProblem}
+\begin{homeworkProblem}
+What was efficient about this program design?\\
+
+The efficiency about this program design is the abstraction between classes. The user only sees the calculator interface and not the ADT. The calculator ADT can only call the stack and queue ADT. The abstraction reduces the amount of bugs that can break the program during run time, thus making it an efficient design implementation. The efficiency also played a part of using a circular linked list to avoid traversal, further implementing the queue and stack ADT as a linked structure avoided traversals with the FIFO and LIFO methodology. 
+\end{homeworkProblem}
+
+
+\begin{homeworkProblem}
+What was not efficient about this program design?\\
+
+The efficiency in this design lacked in the area of using two separate ADT's to accomplish one thing. Further storing the history as a linked list may not be a great idea for large computation. This would be very memory intensive especially with the pointer arithmetic for displaying large queues, and popping for large stacks would still be a linear operation.  
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+What would you do differently?\\
+
+If I could restructure the program I would, there would be more functions, each small and accomplishing different things. It would be more cohesive for a lack of vocabulary. The program also doesn't read in negative numbers so it's a calculator only over the natural numbers.  
+ 
+\end{homeworkProblem}
+
+\end{document}
